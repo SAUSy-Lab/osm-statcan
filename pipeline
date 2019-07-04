@@ -1,0 +1,11 @@
+1. python queryOsm.py
+2. python mergeOsm.py
+3. # make JOSM happy
+osmconvert64 "merged.osm" --fake-version -o="mergedFakeVersion.osm"
+4. # deduplicate in JOSM to make osm2pgsql happy
+5. osm2pgsql -c -d postgis_25_sample -U postgres -H localhost -P 5432 -S default.style "mergedFakeVersion.osm" -W -s
+6. import resources/boundaries/das4326/das4326.shp and run lookupDa.sql
+7. import resources/usCan.csv and run lookupNaicsCan.sql
+8. getStats.py
+9. getPlots.py
+10. getModelsy.py
