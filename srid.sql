@@ -1,4 +1,4 @@
-select UpdateGeometrySRID('public', 'das', 'geom', 4326) ;
+SELECT UpdateGeometrySRID('public', 'das', 'geom', 4326) ;
 
 ALTER TABLE planet_osm_point
 ALTER COLUMN way
