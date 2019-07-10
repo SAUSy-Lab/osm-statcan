@@ -20,7 +20,7 @@ def getData():
     data = statsDa.merge(census, left_on="da", right_on="COL0")
     data = data.merge(canale, left_on="da", right_on="dauid")
 
-    data = data[["naics", "osmCompleteness", "COL1", "COL6", "COL74", "COL512", "COL708", "COL1057", "ale_index"]]
+    data = data[["naics", "countOsm", "countStatcan", "osmCompleteness", "COL1", "COL6", "COL74", "COL512", "COL708", "COL1057", "ale_index"]]
     data.rename(index=str, columns={"COL6": "population density", "COL74": "median income"}, inplace=True)
     
     data["% non-immigrants"] = data["COL512"]/data["COL1"]
@@ -32,9 +32,9 @@ def getData():
     
     return data
 
-def trainModels(data, naics, industry):
+def trainModel(data, naics, industry):
     dataNaics = data[(data["naics"] == naics)]
-    dataNaics.drop(["naics"], axis=1, inplace=True)
+    dataNaics.drop(["naics", "countOsm", "countStatcan"], axis=1, inplace=True)
 
     dataNaics = dataNaics[~dataNaics.isin([np.nan, np.inf, -np.inf]).any(1)]
 
@@ -53,7 +53,7 @@ def trainModels(data, naics, industry):
 
 def main():
     data = getData()
-    trainModels(data, 722511, "restaurant")
+    trainModel(data, 722511, "restaurant")
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,7 @@ import shapefile
 import configparser
 import psycopg2
 
-class GetStats(object):
+class Stats(object):
     def __init__(self):
         dasSf = shapefile.Reader("resources/boundaries/das4326/das4326.shp")
         self.das = [shapeRecord.record.DAUID for shapeRecord in dasSf.shapeRecords()]
@@ -55,7 +55,7 @@ class GetStats(object):
         return pd.concat(stats)
 
 def main():
-    getStats = GetStats()
+    getStats = Stats()
     statsCma = getStats.getStats()
     statsCma.to_csv("stats/statsDa.csv")
 
