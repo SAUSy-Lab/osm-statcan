@@ -53,6 +53,7 @@ def trainModel(data, naics, industry):
 
 def main():
     data = getData()
+    data.to_csv("data/data.csv")
     trainModel(data, 722511, "restaurant")
 
 if __name__ == "__main__":
