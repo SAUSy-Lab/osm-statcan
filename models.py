@@ -28,12 +28,16 @@ def getData():
     data.drop(columns=["COL0", "dauid", "COL1", "COL3", "COL6", "COL7", "COL8", "COL9"], inplace=True)
 
     data.replace(".", np.nan, inplace=True)
+
+    tagNaics = pd.read_csv("resources/tagNaics.tsv", sep='\t')
+    data["naics"] = data["naics"].astype(str)
+    data = data.merge(tagNaics, how="left", left_on="naics", right_on="2012 NAICS US Code").drop(columns=["Seq. No.", "2012 NAICS US Code", "OSM tags"])
     
     return data
 
 def trainModel(data, naics, industry):
     dataNaics = data[(data["naics"] == naics)]
-    dataNaics.drop(["da", "naics", "countOsm", "countStatcan"], axis=1, inplace=True)
+    dataNaics.drop(["da", "naics", "countOsm", "countStatcan", "2012 NAICS US Title"], axis=1, inplace=True)
 
     dataNaics = dataNaics[~dataNaics.isin([np.nan, np.inf, -np.inf]).any(1)]
 
@@ -53,7 +57,7 @@ def trainModel(data, naics, industry):
 def main():
     data = getData()
     data.to_csv("data/data.csv")
-    trainModel(data, 722511, "restaurant")
+    trainModel(data, "722511", "restaurant")
 
 if __name__ == "__main__":
     main()
