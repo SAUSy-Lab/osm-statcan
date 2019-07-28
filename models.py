@@ -14,19 +14,18 @@ from sklearn.metrics import mean_squared_error
 
 def getData():
     statsDa = pd.read_csv("stats/statsDa.csv")
-    census = pd.read_csv("data/census/census.csv")
+    census = pd.read_csv("data/census/1AuriNtO1RDRT_data.csv")
     canale = pd.read_csv("data/canale/CanALE_2016.csv")
 
-    data = statsDa.merge(census, left_on="da", right_on="COL0")
-    data = data.merge(canale, left_on="da", right_on="dauid")
+    data = statsDa.merge(census, how="left", left_on="da", right_on="COL0")
+    data = data.merge(canale, how="left", left_on="da", right_on="dauid")
 
-    data = data[["naics", "countOsm", "countStatcan", "osmCompleteness", "COL1", "COL6", "COL74", "COL512", "COL708", "COL1057", "ale_index"]]
-    data.rename(index=str, columns={"COL6": "population density", "COL74": "median income"}, inplace=True)
+    data.rename(index=str, columns={"COL2": "population density", "COL4": "average age", "COL5": "median income"}, inplace=True)
     
-    data["% non-immigrants"] = data["COL512"]/data["COL1"]
-    data["% not a visible minority"] = data["COL708"]/data["COL1"]
-    data["% postsecondary"] = data["COL1057"]/data["COL1"]
-    data.drop(columns=["COL1", "COL512", "COL708", "COL1057"], inplace=True)
+    data["% non-immigrants"] = data["COL6"]/data["COL1"]
+    data["% not a visible minority"] = data["COL7"]/data["COL1"]
+    data["% postsecondary"] = data["COL9"]/data["COL1"]
+    data.drop(columns=["COL0", "dauid", "COL1", "COL3", "COL6", "COL7", "COL8", "COL9"], inplace=True)
 
     data.replace(".", np.nan, inplace=True)
     
@@ -34,7 +33,7 @@ def getData():
 
 def trainModel(data, naics, industry):
     dataNaics = data[(data["naics"] == naics)]
-    dataNaics.drop(["naics", "countOsm", "countStatcan"], axis=1, inplace=True)
+    dataNaics.drop(["da", "naics", "countOsm", "countStatcan"], axis=1, inplace=True)
 
     dataNaics = dataNaics[~dataNaics.isin([np.nan, np.inf, -np.inf]).any(1)]
 

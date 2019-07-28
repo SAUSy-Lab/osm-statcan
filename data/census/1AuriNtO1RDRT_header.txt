@@ -1,0 +1,11 @@
+2016 Census Profiles Files / Profile of Census Disseminations Areas
+COL0 - GEO UID
+COL1 - Population and dwelling counts / Population, 2016
+COL2 - Population and dwelling counts / Population density per square kilometre
+COL3 - Population and dwelling counts / Land area in square kilometres
+COL4 - Age & Sex - Both sexes / Average age of the population ; Both sexes
+COL5 - Income - Total Sex / Total - Income statistics in 2015 for the population aged 15 years and over in private households - 100% data / Number of total income recipients aged 15 years and over in private households - 100% data / Median total income in 2015 among recipients ($)
+COL6 - Immigration - Total Sex / Total - Immigrant status and period of immigration for the population in private households - 25% sample data / Non-immigrants
+COL7 - Aboriginals and Visible Minorities - Total Sex / Total - Visible minority for the population in private households - 25% sample data / Not a visible minority
+COL8 - Education - Total Sex / Total - Highest certificate, diploma or degree for the population aged 25 to 64 years in private households - 25% sample data / Postsecondary certificate, diploma or degree
+COL9 - Education - Total Sex / Total - Highest certificate, diploma or degree for the population aged 15 years and over in private households - 25% sample data / Postsecondary certificate, diploma or degree
